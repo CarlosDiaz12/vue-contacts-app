@@ -1,11 +1,11 @@
 <template>
   <h1>{{ msg }}</h1>
-  <ContactsGrid :contacts="allContacts" />
-  <button v-on:click="increment">Add Contact</button>
+  <ContactsGrid :contacts="contactList" />
 </template>
 <script>
 import store from '../stores/contact_store';
 import ContactsGrid from '../components/ContactsGrid';
+import { mapGetters } from 'vuex';
 export default {
   name: 'Home',
   components: {
@@ -18,14 +18,12 @@ export default {
     msg: String,
   },
   methods: {
-    increment() {
+    addContact() {
       this.$store.commit('addContact', { name: 'Carlos' });
     },
   },
   computed: {
-    allContacts() {
-      return this.$store.getters.allContacts;
-    },
+    ...mapGetters({ contactList: 'getAllContacts' }),
   },
 };
 </script>

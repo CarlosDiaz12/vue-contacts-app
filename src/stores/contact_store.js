@@ -3,38 +3,29 @@ import { createStore } from 'vuex';
 const store = createStore({
   state() {
     return {
-      count: 0,
       contacts: [],
     };
   },
   mutations: {
-    addContact(state, newContact) {
-      state.contacts.push(newContact);
+    addContact(state, newValue) {
+      state.contacts.push(newValue);
+    },
+    editContact(state, payload) {
+      var index = payload.index;
+      state.contacts[index] = payload.newValue;
+    },
+    deleteContactAt(state, payload) {
+      state.contacts.splice(payload.index, 1);
     },
   },
   getters: {
-    allContacts(state) {
+    getAllContacts(state) {
       return state.contacts;
+    },
+    getContactById: (state, getters) => (payload) => {
+      return getters.allContacts[payload.index];
     },
   },
 });
 
 export default store;
-// export default {
-//   debug: true,
-//   state: reactive({
-//     contacts: [1, 2, 3],
-//   }),
-
-//   addContact(newValue) {
-//     this.state.contacts.push(newValue);
-//   },
-
-//   //   editContact(index, newValue) {
-//   //     // TODO: edit contact
-//   //   },
-
-//   //   deleleContact(index) {
-//   //     // TODO: delete contact
-//   //   },
-// };
