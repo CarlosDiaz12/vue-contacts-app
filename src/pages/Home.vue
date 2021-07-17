@@ -1,6 +1,7 @@
 <template>
   <h1>{{ msg }}</h1>
   <ContactsGrid :contacts="contactList" />
+  <button class="btn btn-success">Ok</button>
 </template>
 <script>
 import store from '../stores/contact_store';
