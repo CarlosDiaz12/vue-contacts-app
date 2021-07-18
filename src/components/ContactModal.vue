@@ -39,7 +39,6 @@
 <script>
 export default {
   name: 'ContactModal',
-  data() {},
   props: {
     type: String,
   },
