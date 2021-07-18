@@ -11,7 +11,7 @@ const store = createStore({
       state.contacts.push(newValue);
     },
     editContact(state, payload) {
-      var index = payload.index;
+      var index = payload.newValue.index;
       state.contacts[index] = payload.newValue;
     },
     deleteContactAt(state, payload) {
@@ -23,7 +23,7 @@ const store = createStore({
       return state.contacts;
     },
     getContactById: (state, getters) => (payload) => {
-      return getters.allContacts[payload.index];
+      return getters.getAllContacts[payload.index];
     },
   },
 });
