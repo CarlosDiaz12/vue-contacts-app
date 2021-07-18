@@ -39,6 +39,7 @@
 <script>
 export default {
   name: 'ContactModal',
+  emits: ['save', 'close'],
   props: {
     type: String,
   },

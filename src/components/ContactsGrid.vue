@@ -20,10 +20,9 @@
         <td>{{ item.age }}</td>
         <td>{{ item.email }}</td>
         <td>
-          <button class="btn btn-info" @click="editElement(index)">
+          <button class="mr-5 btn btn-info" @click="editElement(index)">
             Edit
           </button>
-
           <button class="btn btn-danger" @click="deleteElement(index)">
             Delete
           </button>
@@ -35,7 +34,7 @@
 <script>
 export default {
   name: 'ContactsGrid',
-  emits: ['delete'],
+  emits: ['delete', 'edit'],
   props: {
     contacts: Array,
   },
@@ -49,8 +48,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-table {
-  width: 700px !important;
-}
-</style>
+<style scoped></style>

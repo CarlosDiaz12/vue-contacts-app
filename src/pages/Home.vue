@@ -1,12 +1,18 @@
 <template>
   <h1>{{ msg }}</h1>
-  <div class="d-flex justify-content-center">
-    <button class="btn btn-success" @click="openModal">Add</button>
-    <ContactsGrid
-      :contacts="contactList"
-      v-on:delete="deleteByIndex"
-      v-on:edit="initEditContact"
-    />
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <button class="btn btn-success" @click="openModal">Add</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-center mt-1">
+      <ContactsGrid
+        :contacts="contactList"
+        v-on:delete="deleteByIndex"
+        v-on:edit="initEditContact"
+      />
+    </div>
   </div>
   <ContactModal
     v-if="showModal"
@@ -37,16 +43,6 @@
           />
         </div>
         <div class="form-group mb-3">
-          <label for="age">Age</label>
-          <input
-            v-model="contact.age"
-            type="number"
-            class="form-control"
-            id="age"
-            placeholder="Age"
-          />
-        </div>
-        <div class="form-group">
           <label for="email">Email</label>
           <input
             v-model="contact.email"
@@ -54,6 +50,16 @@
             class="form-control"
             id="email"
             placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Phone Number</label>
+          <input
+            v-model="contact.phone_number"
+            type="phone"
+            class="form-control"
+            id="phone"
+            placeholder="Phone Number"
           />
         </div>
       </form>
@@ -90,6 +96,11 @@ export default {
   },
   methods: {
     manageSave() {
+      var isNotValid = Object.values(this.contact).some(
+        (i) => typeof i != 'number' && i.trim() == ''
+      );
+      console.log(Object.values(this.contact));
+      if (isNotValid) return;
       switch (this.action) {
         case 'A':
           this.saveContact();
@@ -130,7 +141,7 @@ export default {
     cleanForm() {
       this.contact.name = '';
       this.contact.last_name = '';
-      this.contact.age = '';
+      this.contact.phone_number = '';
       this.contact.email = '';
       this.contact.index = -1;
     },
@@ -145,7 +156,8 @@ export default {
 </script>
 
 <style scoped>
-label {
+label,
+h1 {
   font-weight: bold;
 }
 
